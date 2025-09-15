@@ -1,7 +1,7 @@
 package ru.netology;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class CashbackHackServiceTest {
 
@@ -13,7 +13,7 @@ public class CashbackHackServiceTest {
         int actual = service.remain(amount);
         int expected = 0;
 
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -24,7 +24,7 @@ public class CashbackHackServiceTest {
         int actual = service.remain(amount);
         int expected = 1000;
 
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class CashbackHackServiceTest {
         int actual = service.remain(amount);
         int expected = 700;
 
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class CashbackHackServiceTest {
         int actual = service.remain(amount);
         int expected = 500;
 
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -57,7 +57,23 @@ public class CashbackHackServiceTest {
         int actual = service.remain(amount);
         int expected = 0;
 
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(expected, actual);
     }
 
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionWhenAmountIsNegative() {
+        CashbackHackService service = new CashbackHackService();
+        int amount = -100;
+
+        service.remain(amount);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionWhenAmountIsVeryNegative() {
+        CashbackHackService service = new CashbackHackService();
+        int amount = -1000;
+
+        service.remain(amount);
+    }
 }
